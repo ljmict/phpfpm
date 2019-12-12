@@ -21,6 +21,7 @@ RUN ./configure \
     && cp php.ini-production /etc/php.ini && cd /tmp && rm -rf php-${PHP_VERSION} 
 WORKDIR /apps/php-${PHP_VERSION}
 RUN mv etc/php-fpm.conf.default etc/php-fpm.conf \
-    && mv etc/php-fpm.d/www.conf.default /apps/php-7.4.0/etc/php-fpm.d/www.conf
+    && mv etc/php-fpm.d/www.conf.default /apps/php-${PHP_VERSION}/etc/php-fpm.d/www.conf \
+    && sed -i 's#127.0.0.1:9000#0.0.0.0:9000#g' /apps/php-${PHP_VERSION}/etc/php-fpm.d/www.conf
 EXPOSE 9000/tcp
 ENTRYPOINT ["php-fpm", "-F"]
