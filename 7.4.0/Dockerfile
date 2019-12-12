@@ -4,7 +4,7 @@ ENV PHP_VERSION=7.4.0
 RUN yum install epel-release -y \
     && yum install libxml2-devel bzip2-devel libmcrypt-devel gcc gcc-c++- make openssl-devel libsqlite3x-devel oniguruma-devel -y \
     && yum clean all
-RUN curl https://www.php.net/distributions/php-7.4.0.tar.xz -o /tmp
+RUN curl https://www.php.net/distributions/php-${PHP_VERSION}.tar.xz -o /tmp/php-${PHP_VERSION}.tar.xz
 WORKDIR /tmp
 RUN tar xf php-${PHP_VERSION}.tar.xz && rm -f php-${PHP_VERSION}.tar.xz
 WORKDIR /tmp/php-${PHP_VERSION}
