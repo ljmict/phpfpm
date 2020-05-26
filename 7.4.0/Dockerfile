@@ -1,6 +1,6 @@
 FROM centos:7
 LABEL author=ljm email=ljmict@163.com
-ENV PHP_VERSION=7.4.0 \
+ENV PHP_VERSION=7.4.0
 RUN yum install epel-release -y \
     && yum install libxml2-devel bzip2-devel libmcrypt-devel gcc gcc-c++- make openssl-devel libsqlite3x-devel oniguruma-devel -y \
     && yum clean all
