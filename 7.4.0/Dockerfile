@@ -1,8 +1,6 @@
 FROM centos:7
 LABEL author=ljm email=ljmict@163.com
 ENV PHP_VERSION=7.4.0 \
-    PHPFPM_USER=nginx \
-    PHPFPM_GROUP=nginx
 RUN yum install epel-release -y \
     && yum install libxml2-devel bzip2-devel libmcrypt-devel gcc gcc-c++- make openssl-devel libsqlite3x-devel oniguruma-devel -y \
     && yum clean all
@@ -24,8 +22,5 @@ RUN ./configure \
 WORKDIR /apps/php-${PHP_VERSION}
 RUN mv etc/php-fpm.conf.default etc/php-fpm.conf \
     && mv etc/php-fpm.d/www.conf.default /apps/php-${PHP_VERSION}/etc/php-fpm.d/www.conf \
-    && sed -i 's#127.0.0.1:9000#0.0.0.0:9000#g' /apps/php-${PHP_VERSION}/etc/php-fpm.d/www.conf \
-    && sed -i "s#user = nobody#user = ${PHPFPM_USER}#g" /apps/php-${PHP_VERSION}/etc/php-fpm.d/www.conf \
-    && sed -i "s#group = nobody#user = ${PHPFPM_GROUP}#g" /apps/php-${PHP_VERSION}/etc/php-fpm.d/www.conf 
 EXPOSE 9000/tcp
 ENTRYPOINT ["php-fpm", "-F"]
