@@ -23,4 +23,4 @@ WORKDIR /apps/php-${PHP_VERSION}
 RUN mv etc/php-fpm.conf.default etc/php-fpm.conf \
     && mv etc/php-fpm.d/www.conf.default /apps/php-${PHP_VERSION}/etc/php-fpm.d/www.conf
 EXPOSE 9000/tcp
-ENTRYPOINT ["php-fpm", "-F"]
+CMD ["php-fpm", "-F"]
